@@ -2,6 +2,7 @@ import json
 import os
 import re
 from time import sleep, time
+import random
 
 from openai import OpenAI
 from shortGPT.config.api_db import ApiKeyManager
@@ -9,7 +10,9 @@ from shortGPT.config.api_db import ApiKeyManager
 import tiktoken
 import yaml
 
-client = OpenAI(api_key=ApiKeyManager.get_api_key("OPENAI"))
+def get_api_key():
+    keys= ApiKeyManager.get_api_key("OPENAI").split(",")
+    return keys[random.randint(0, len(keys)-1)]
 
 def num_tokens_from_messages(texts, model="gpt-3.5-turbo-0301"):
     """Returns the number of tokens used by a list of messages."""
@@ -76,6 +79,7 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
     retry = 0
     while True:
         try:
+            client = OpenAI(api_key= get_api_key())
             if conversation:
                 messages = conversation
             else:
