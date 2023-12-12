@@ -12,7 +12,7 @@ import yaml
 
 keys= ApiKeyManager.get_api_key("OPENAI").split(",")
 max = len(keys)-1
-i= 0
+keyIndex= 0
     
 
 def num_tokens_from_messages(texts, model="gpt-3.5-turbo-0301"):
@@ -78,11 +78,11 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
     
     max_retry = 5
     retry = 0
-    k=keys[i]
+    k=keys[keyIndex]
     client = OpenAI(api_key= k)
-    i+=1
-    if i>max:
-        i=0
+    keyIndex+=1
+    if keyIndex>max:
+        keyIndex=0
     while True:
         try:
             if conversation:
