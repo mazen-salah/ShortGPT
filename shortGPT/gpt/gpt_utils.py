@@ -10,6 +10,9 @@ from shortGPT.config.api_db import ApiKeyManager
 import tiktoken
 import yaml
 
+keys= ApiKeyManager.get_api_key("OPENAI").split(",")
+max = len(keys)-1
+i= 0
     
 
 def num_tokens_from_messages(texts, model="gpt-3.5-turbo-0301"):
@@ -73,12 +76,13 @@ def open_file(filepath):
 
 def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the answer to anything", temp=0.7, model="gpt-3.5-turbo", max_tokens=1000, remove_nl=True, conversation=None):
     
-    max_retry = 9
+    max_retry = 5
     retry = 0
-    keys= ApiKeyManager.get_api_key("OPENAI").split(",")
-    i= random.randint(0, len(keys)-1)
     k=keys[i]
     client = OpenAI(api_key= k)
+    i+=1
+    if i>max:
+        i=0
     while True:
         try:
             if conversation:
