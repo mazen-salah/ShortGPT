@@ -77,9 +77,9 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
     
     max_retry = 5
     retry = 0
+    client = OpenAI(api_key= get_api_key())
     while True:
         try:
-            client = OpenAI(api_key= get_api_key())
             if conversation:
                 messages = conversation
             else:
