@@ -76,7 +76,8 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
     max_retry = 9
     retry = 0
     keys= ApiKeyManager.get_api_key("OPENAI").split(",")
-    k=keys[random.randint(0, len(keys)-1)]
+    i= random.randint(0, len(keys)-1)
+    k=keys[i]
     client = OpenAI(api_key= k)
     while True:
         try:
@@ -103,6 +104,6 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
         except Exception as oops:
             retry += 1
             if retry >= max_retry:
-                raise Exception(k,"GPT3 error: %s" % oops)
-            print(k,'Error communicating with OpenAI:', oops)
+                raise Exception("GPT3 error: %s" % oops)
+            print('Error communicating with OpenAI:', oops)
             sleep(1)
