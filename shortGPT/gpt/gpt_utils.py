@@ -10,9 +10,7 @@ from shortGPT.config.api_db import ApiKeyManager
 import tiktoken
 import yaml
 
-def get_api_key():
-    keys= ApiKeyManager.get_api_key("OPENAI").split(",")
-    return keys[random.randint(0, len(keys)-1)]
+    
 
 def num_tokens_from_messages(texts, model="gpt-3.5-turbo-0301"):
     """Returns the number of tokens used by a list of messages."""
@@ -75,9 +73,11 @@ def open_file(filepath):
 
 def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the answer to anything", temp=0.7, model="gpt-3.5-turbo", max_tokens=1000, remove_nl=True, conversation=None):
     
-    max_retry = 5
+    max_retry = 9
     retry = 0
-    client = OpenAI(api_key= get_api_key())
+    keys= ApiKeyManager.get_api_key("OPENAI").split(",")
+    k=keys[random.randint(0, len(keys)-1)]
+    client = OpenAI(api_key= k)
     while True:
         try:
             if conversation:
@@ -103,6 +103,6 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
         except Exception as oops:
             retry += 1
             if retry >= max_retry:
-                raise Exception("GPT3 error: %s" % oops)
-            print('Error communicating with OpenAI:', oops)
+                raise Exception(k,"GPT3 error: %s" % oops)
+            print(k,'Error communicating with OpenAI:', oops)
             sleep(1)
