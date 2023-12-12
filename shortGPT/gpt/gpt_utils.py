@@ -10,9 +10,7 @@ from shortGPT.config.api_db import ApiKeyManager
 import tiktoken
 import yaml
 
-keys= ApiKeyManager.get_api_key("OPENAI").split(",")
-max = len(keys)-1
-keyIndex= 0
+
     
 
 def num_tokens_from_messages(texts, model="gpt-3.5-turbo-0301"):
@@ -78,6 +76,9 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
     
     max_retry = 5
     retry = 0
+    keys= ApiKeyManager.get_api_key("OPENAI").split(",")
+    max = len(keys)-1
+    keyIndex= 0
     k=keys[keyIndex]
     client = OpenAI(api_key= k)
     keyIndex+=1
@@ -97,6 +98,7 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
             max_tokens=max_tokens,
             temperature=temp)
             text = response['choices'][0]['message']['content'].strip()
+            print('GPT3 response:', text)
             if remove_nl:
                 text = re.sub('\s+', ' ', text)
             filename = '%s_gpt3.txt' % time()
@@ -104,6 +106,7 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
                 os.makedirs('.logs/gpt_logs')
             with open('.logs/gpt_logs/%s' % filename, 'w', encoding='utf-8') as outfile:
                 outfile.write(f"System prompt: ===\n{system}\n===\n"+f"Chat prompt: ===\n{chat_prompt}\n===\n" + f'RESPONSE:\n====\n{text}\n===\n')
+            # sleep(10)
             return text
         except Exception as oops:
             retry += 1
