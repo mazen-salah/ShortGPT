@@ -81,7 +81,7 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
     keyIndex= 0
     k=keys[keyIndex]
     client = OpenAI(api_key= k)
-    
+
     while True:
         try:
             if conversation:
@@ -95,7 +95,7 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
             messages=messages,
             max_tokens=max_tokens,
             temperature=temp)
-            text = response['choices'][0]['message']['content'].strip()
+            text = response.choices[0].message.content.strip()
             print('GPT3 response:', text)
             if remove_nl:
                 text = re.sub('\s+', ' ', text)
