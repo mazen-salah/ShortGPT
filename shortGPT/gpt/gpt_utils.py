@@ -81,9 +81,7 @@ def gpt3Turbo_completion(chat_prompt="", system="You are an AI that can give the
     keyIndex= 0
     k=keys[keyIndex]
     client = OpenAI(api_key= k)
-    keyIndex+=1
-    if keyIndex>max:
-        keyIndex=0
+    
     while True:
         try:
             if conversation:
