@@ -146,10 +146,10 @@ class ShortAutomationUI(AbstractComponentUI):
 
         openai_key = ApiKeyManager.get_api_key("OPENAI")
         if not openai_key:
-            raise gr.Error("OPENAI API key is missing. Please go to the config tab and enter the API key.")
+            raise gr.Error("Key 1 is missing. Please go to the config tab and enter the API key.")
         eleven_labs_key = ApiKeyManager.get_api_key("ELEVEN LABS")
         if self.tts_engine == AssetComponentsUtils.ELEVEN_TTS and not eleven_labs_key:
-            raise gr.Error("ELEVEN LABS API key is missing. Please go to the config tab and enter the API key.")
+            raise gr.Error("Key 2 is missing. Please go to the config tab and enter the API key.")
         return gr.update(visible=False)
 
     def create_short_engine(self, short_type, voice_module, language, numImages, watermark, background_video, background_music, facts_subject):
