@@ -7,15 +7,14 @@ class CLI:
     def display_header():
         '''Display the header of the CLI'''
         CLI.display_green_text('''
-.d88888b  dP     dP   .88888.    888888ba  d888888P  .88888.   888888ba  d888888P
-88.    "' 88     88  d8'   `8b   88    `8b    88    d8'   `88  88    `8b    88
-`Y88888b. 88aaaaa88  88     88   88aaaa8P'    88    88         88aaaa8P'    88
-      `8b 88     88  88     88   88   `8b.    88    88   YP88  88           88
-d8'   .8P 88     88  Y8.   .8P   88     88    88    Y8.   .88  88           88
- Y88888P  dP     dP   `8888P'    dP     dP    dP     `88888'   dP           dP
-
+     __  __                       _____                         
+    |  \/  | __ _ _______ _ __   |_   _|_ _ _ __ ___   ___ _ __ 
+    | |\/| |/ _` |_  / _ \ '_ \    | |/ _` | '_ ` _ \ / _ \ '__|
+    | |  | | (_| |/ /  __/ | | |   | | (_| | | | | | |  __/ |   
+    |_|  |_|\__,_/___\___|_| |_|   |_|\__,_|_| |_| |_|\___|_|   
         ''')
-        CLI.display_green_text("Welcome to ShortGPT! This is an experimental AI framework to automate all aspects of content creation.")
+        CLI.display_green_text(
+            "Welcome this Ai belongs to Mazen Tamer +201010112468.")
         print("")
         CLI.display_requirements_check()
 
@@ -36,7 +35,8 @@ d8'   .8P 88     88  Y8.   .8P   88     88    88    Y8.   .88  88           88
         all_req_versions = requirements_manager.get_all_requirements_versions()
         for req_name, req_version in all_req_versions.items():
             if req_version is None:
-                CLI.display_red_text(f"---> Error : {req_name} is not installed")
+                CLI.display_red_text(
+                    f"---> Error : {req_name} is not installed")
             print(f"{req_name}=={req_version}")
 
         print("")
