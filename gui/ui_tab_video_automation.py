@@ -49,11 +49,11 @@ class VideoAutomationUI(AbstractComponentUI):
     def is_key_missing(self):
         openai_key = ApiKeyManager.get_api_key("OPENAI")
         if not openai_key:
-            return "Your OpenAI key is missing. Please go to the config tab and enter the API key."
+            return "key 1 is missing. Please go to the config tab and enter the API key."
 
         pexels_api_key = ApiKeyManager.get_api_key("PEXELS")
         if not pexels_api_key:
-            return "Your Pexels API key is missing. Please go to the config tab and enter the API key."
+            return "key 3 is missing. Please go to the config tab and enter the API key."
 
     def generate_script(self, message, language):
         return gpt_chat_video.generateScript(message, language)
